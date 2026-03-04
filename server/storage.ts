@@ -102,12 +102,16 @@ export class FileStorage implements IStorage {
   private stotramsBySlug: Record<string, Stotram[]> = {};
 
   constructor() {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const dataPath = path.join(__dirname, "data.json");
-    const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
-    this.categoriesList = data.categories;
-    this.stotramsBySlug = data.stotrams;
+    // const __filename = fileURLToPath(import.meta.url);
+    // const __dirname = path.dirname(__filename);
+    //const dataPath = path.join(__dirname, "data.json");
+    const dataPath = path.resolve(process.cwd(), "server", "data.json");
+    // const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+    // this.categoriesList = data.categories;
+    // this.stotramsBySlug = data.stotrams;
+     const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+     this.categoriesList = data.categories;
+     this.stotramsBySlug = data.stotrams;
   }
 
   async getCategories(): Promise<Category[]> {
